@@ -33,10 +33,7 @@ DOCKER:
 docker build -f ./core/Dockerfile -t nccgbot:latest ./core
 
 
-docker run -d \
-    -p 8006:8000 \
-    -e "SECRET_KEY=please_change_me" -e "DEBUG=1" -e "DJANGO_ALLOWED_HOSTS=*" \
-    nccgbot python /usr/src/app/manage.py runserver 0.0.0.0:8000
+docker run -d -p 8000:8000 -e "SECRET_KEY=please_change_me" -e "DEBUG=1" -e "DJANGO_ALLOWED_HOSTS=*" nccg-chatbot_web  python /usr/src/app/manage.py runserver 0.0.0.0:8000
 
 
 Remobe dangling images 
@@ -45,3 +42,19 @@ docker rmi -f $(docker images -f "dangling=true" -q)
 
 
 install spacy==2.3.2 manually
+
+
+docker-compose -f docker-compose-deploy.yml build --no-cache
+
+
+
+
+List all containers (only IDs) docker ps -aq.
+Stop all running containers. docker stop $(docker ps -aq)
+Remove all containers. docker rm $(docker ps -aq)
+Remove all images. docker rmi $(docker images -q)
+
+
+# TODO 
+
+- Remove nccbot service 
