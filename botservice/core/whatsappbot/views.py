@@ -7,33 +7,23 @@ import emoji
 import random
 import json
 
-
 from django.http import Http404
 from rest_framework.views import APIView
 from rest_framework.response import Response
 from rest_framework import status
 
-
-
-
-import os 
-from twilio.rest import Client 
+import os
+from twilio.rest import Client
 
 # Your Account Sid and Auth Token from twilio.com/console
 # DANGER! This is insecure. See http://twil.io/secure
 account_sid = 'AC1371371565de40e129313dea78dc79d5'
-auth_token = '2fb801eb548b8fff8abd7a15c44e57c2'
+auth_token = 'de0a12b5d1acfaee6b93f2f3e7a57f37'
 client = Client(account_sid, auth_token)
-
-
-
-
-
 
 
 class ChatAPIView(APIView):
     def post(self, request, format=None):
-
 
         # print(request.data)
         # retrieve incoming message from POST request in lowercase
@@ -46,35 +36,82 @@ class ChatAPIView(APIView):
         # responded = False
 
         if incoming_msg == 'hello':
-            response = emoji.emojize("""
-                    *Hi! I am the Quarantine Bot* :wave:
-                    Let's be friends :wink:
-                    You can give me the following commands:
-                    :black_small_square: *'quote':* Hear an inspirational quote to start your day! :rocket:
-                    :black_small_square: *'cat'*: Who doesn't love cat pictures? :cat:
-                    :black_small_square: *'dog'*: Don't worry, we have dogs too! :dog:
-                    :black_small_square: *'meme'*: The top memes of today, fresh from r/memes. :hankey:
-                    :black_small_square: *'news'*: Latest news from around the world. :newspaper:
-                    :black_small_square: *'recipe'*: Searches Allrecipes.com for the best recommended recipes. :fork_and_knife:
-                    :black_small_square: *'recipe <query>'*: Searches Allrecipes.com for the best recipes based on your query. :mag:
-                    :black_small_square: *'get recipe'*: Run this after the 'recipe' or 'recipe <query>' command to fetch your recipes! :stew:
-                    :black_small_square: *'statistics <country>'*: Show the latest COVID19 statistics for each country. :earth_americas:
-                    :black_small_square: *'statistics <prefix>'*: Show the latest COVID19 statistics for all countries starting with that prefix. :globe_with_meridians:
-                    """,use_aliases=True)
-            
+            response = emoji.emojize("""*Hi! Welcome to RevenueSure*
+            \nYou can give me the following commands:
+            \n*Commands:*
+            \n1. parking - go to parking
+            \n2. sbp - go to single business permits
+            \n3. lr - go to landrates
+            \n4. rent - go to rent section
+            \n5. bill - pay a specific bill
+            \n6. me - go to your profile
+            \n7. help - view commands
+            """,
+                                     use_aliases=True)
+
             body = msg.body(response)
 
             response = client.messages.create(
-                              body='test',
-                              from_='whatsapp:+14155238886',
-                            #   status_callback='https://feeb1763bc3e.ngrok.io/whatsapp/callback/',
-                              to='whatsapp:+254722212132'
-                          )
+                body=response,
+                from_='whatsapp:+14155238886',
+                #   status_callback='https://feeb1763bc3e.ngrok.io/whatsapp/callback/',
+                to='whatsapp:+254722212132')
 
             print(response.sid)
 
             # print(body)
             responded = True
+            return Response(str(body), status=status.HTTP_200_OK)
+        elif incoming_msg == 'parking':
+            response = emoji.emojize("""*select option*
+            \nYou can give me the following commands:
+            \n1. Daily Parking
+            \n2. Topup Daily Parking
+            \n3. Seasonal Parking
+            \n4. Offstreet Parking
+            \n5. Penalties
+            \n6. Parking Status
+            \n7. Offloading Zone
+            """,
+                                     use_aliases=True)
+
+            body = msg.body(response)
+
+            response = client.messages.create(
+                body=response,
+                from_='whatsapp:+14155238886',
+                #   status_callback='https://feeb1763bc3e.ngrok.io/whatsapp/callback/',
+                to='whatsapp:+254722212132')
+
+            print(response.sid)
+
+            # print(body)
+            responded = True
+
+
+            # print(body)
+            # data=json.dumps(body)
+            # print(body)
+            return Response(str(body), status=status.HTTP_200_OK)
+
+        elif incoming_msg == '1':
+            response = emoji.emojize("""
+            \nWhat is your Vehicle's Number Plate?
+            """,use_aliases=True)
+
+            body = msg.body(response)
+
+            response = client.messages.create(
+                body=response,
+                from_='whatsapp:+14155238886',
+                #   status_callback='https://feeb1763bc3e.ngrok.io/whatsapp/callback/',
+                to='whatsapp:+254722212132')
+
+            print(response.sid)
+
+            # print(body)
+            responded = True
+
 
             # print(body)
             # data=json.dumps(body)
