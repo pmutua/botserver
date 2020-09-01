@@ -33,6 +33,8 @@ class ChatAPIView(APIView):
         resp = MessagingResponse()
         msg = resp.message()
 
+        print(request.data)
+
         # responded = False
 
         if incoming_msg == 'hello':
