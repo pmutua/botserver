@@ -57,8 +57,6 @@ CHATTERBOT = {
         },
         {
             'import_path': 'chatterbot.logic.UnitConversion',
-        },{
-            'import_path': 'chatterbot.logic.TimeLogicAdapter',
         },
         {
             'import_path': 'chatterbot.logic.MathematicalEvaluation',
@@ -67,7 +65,8 @@ CHATTERBOT = {
     'trainer': 'chatterbot.trainers.ChatterBotCorpusTrainer',
     'storage_adapter': 'chatterbot.storage.DjangoStorageAdapter',
     'training_data': [
-        "chatterbot.corpus.english"
+        "chatterbot.corpus.english",
+        "knowledge"
     ]
 }
 

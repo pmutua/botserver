@@ -15,11 +15,17 @@ class Command(BaseCommand):
         from chatterbot.ext.django_chatterbot import settings
         from chatterbot.trainers import ChatterBotCorpusTrainer
 
+        from chatterbot.trainers import ListTrainer
+
         chatterbot = ChatBot(**settings.CHATTERBOT)
 
         trainer = ChatterBotCorpusTrainer(chatterbot)
 
         trainer.train(*settings.CHATTERBOT['training_data'])
+
+        
+
+
 
         # Django 1.8 does not define SUCCESS
         if hasattr(self.style, 'SUCCESS'):
