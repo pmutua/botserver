@@ -49,11 +49,25 @@ INSTALLED_APPS = [
 
 CHATTERBOT = {
     'name': 'NCCG Support Bot',
-    # 'django_app_name': 'chatbot',
     'logic_adapters': [
-        'chatterbot.logic.MathematicalEvaluation',
-        'chatterbot.logic.TimeLogicAdapter',
-        'chatterbot.logic.BestMatch'
+        {
+            'import_path': 'chatterbot.logic.BestMatch',
+            'default_response': 'I am sorry, but I do not understand.',
+            'maximum_similarity_threshold': 0.1
+        },
+        {
+            'import_path': 'chatterbot.logic.UnitConversion',
+        },{
+            'import_path': 'chatterbot.logic.TimeLogicAdapter',
+        },
+        {
+            'import_path': 'chatterbot.logic.MathematicalEvaluation',
+        },
+    ],
+    'trainer': 'chatterbot.trainers.ChatterBotCorpusTrainer',
+    'storage_adapter': 'chatterbot.storage.DjangoStorageAdapter',
+    'training_data': [
+        "chatterbot.corpus.english"
     ]
 }
 

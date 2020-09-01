@@ -74,3 +74,11 @@ Remove all images. docker rmi $(docker images -q)
 # TODO 
 
 - Remove nccbot service 
+
+
+
+Django first-time initialization and Training:
+
+
+% python manage.py migrate --run-syncdb
+% python manage.py migrate train
