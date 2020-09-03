@@ -82,3 +82,9 @@ Django first-time initialization and Training:
 
 % python manage.py migrate --run-syncdb
 % python manage.py migrate train
+
+
+
+# SET WEBHOOK 
+
+https://api.telegram.org/bot1270864149:AAEABZByVcIWGNvOjainjiIgs2g5zArcKSk/setWebhook?url=https://af2f23f0c1d5.ngrok.io/tbot/webhook/

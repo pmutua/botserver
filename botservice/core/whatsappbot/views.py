@@ -74,8 +74,7 @@ class ChatAPIView(APIView):
             \n5. Penalties
             \n6. Parking Status
             \n7. Offloading Zone
-            """,
-                                     use_aliases=True)
+            """,use_aliases=True)
 
             body = msg.body(response)
 

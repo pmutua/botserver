@@ -39,5 +39,6 @@ urlpatterns = [
     path('doc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
     path('api-auth/', include('rest_framework.urls')),
     path('api/', include('chatbot.urls')),
-    path('whatsapp/', include('whatsappbot.urls'))
+    # path('whatsapp/', include('whatsappbot.urls')),
+    path('tbot/', include('telegrambot.urls')),
 ]

@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 
 import os
 
+from pymongo import MongoClient
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -25,7 +27,7 @@ SECRET_KEY = 'apim5c4zb+!0(0x0me+y^e$&*g8r-3gaj5v!sedn!l4p$g_=0t'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['feeb1763bc3e.ngrok.io']
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -40,8 +42,16 @@ INSTALLED_APPS = [
     'chatterbot.ext.django_chatterbot',
     'rest_framework',
     'drf_yasg',
-    'chatbot'
+    'chatbot',
+    'telegrambot'
 ]
+
+
+
+BOT_TOKEN =  '1270864149:AAEABZByVcIWGNvOjainjiIgs2g5zArcKSk'
+BOT_URL = "https://api.telegram.org/bot%s/"%BOT_TOKEN
+BOT_CHAT_ID =  '1270864149'
+URL = "https://ca757cb1f3eb.ngrok.io/tbot/webhook/"
 
 
 
@@ -113,6 +123,14 @@ DATABASES = {
     }
 }
 
+MONGO_CLIENT = MongoClient("mongodb://localhost:27017/") 
+# mongodb_user = os.getenv("MONGO_USER")
+# mongodb_password = os.getenv("MONGO_PASSWORD")
+# mongodb_host = os.getenv("MONGO_HOST")
+# MONGO_CLIENT = MongoClient(
+#     f"mongodb://{mongodb_user}:{mongodb_password}@{mongodb_host}"
+# )
+MONGO_DB = MONGO_CLIENT.tbot
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
