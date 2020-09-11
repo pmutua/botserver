@@ -173,3 +173,9 @@ STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
+
+
+TELEGRAM_BOT_HANDLERS_CONF = "telegrambot.bot_handlers"
+TELEGRAM_BOT_TOKEN_EXPIRATION = "2" # tow hours before a token expires
