@@ -1,0 +1,41 @@
+version: '3.7'
+
+services: 
+  # Chat bot 
+  nccgbot-service:
+    container_name: nccgbot-service
+    image: nccgbot-service
+    build:
+      context: ./botservice
+
+    command: sh -c "python manage.py makemigrations && python manage.py collectstatic --no-input  && python manage.py migrate && gunicorn core.wsgi:application --workers 2 --bind 0.0.0.0:8000"
+
+    volumes:
+      - static_data:/vol/web
+
+    env_file:
+      - ./.env
+
+    expose: 
+      - "8000"
+
+    restart: on-failure
+  
+  # proxies requests to internal services
+  reverse_proxy:
+    build:
+      context: ./reverse_proxy
+    restart: always
+    image: reverse-proxy
+    container_name: reverse-proxy
+    volumes:
+      - static_data:/vol/static
+
+    ports:
+      - "80:80"
+
+    depends_on:
+      - nccgbot-service
+
+volumes:
+  static_data:
