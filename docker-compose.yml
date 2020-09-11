@@ -1,9 +1,9 @@
 version: '3.7'
 
 services:
-  nccgbot-service:
+  botservice:
     build:
-      context: ./nccgbot_service
+      context: ./botservice
     command: sh -c "python manage.py runserver 0.0.0.0:8000"
     # volumes:
     #   - ./app:/app
