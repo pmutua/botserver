@@ -48,10 +48,10 @@ INSTALLED_APPS = [
 
 
 
-BOT_TOKEN =  '1270864149:AAEABZByVcIWGNvOjainjiIgs2g5zArcKSk'
+BOT_TOKEN =  ''
 BOT_URL = "https://api.telegram.org/bot%s/"%BOT_TOKEN
-BOT_CHAT_ID =  '1270864149'
-URL = "https://ca757cb1f3eb.ngrok.io/tbot/webhook/"
+BOT_CHAT_ID =  ''
+URL = ""
 
 
 
